@@ -1,3 +1,6 @@
+More Hash Commands
+------------------
+
 
 
 HEXISTS
@@ -9,5 +12,6 @@ HMGET
 HMSET
 
 HINCRBY
+
 
 
