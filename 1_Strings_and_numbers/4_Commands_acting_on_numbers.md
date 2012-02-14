@@ -22,31 +22,31 @@ Simple Maths:
 
 These INCR and DECR commands are very useful indeed in avoiding problematic conditions when redis is being used by more than one client. Succintly, it sidesteps the race-condition that would be presented by the following workflow:
 
-1 - GET counter value
-2 - SET counter to value + 1
+1. GET counter value
+2. SET counter to value + 1
 
 It shouldn't need to be explained why this pattern is very problematic when more than one client becomes involved. Let's see the commands in action to see how they help here.
 
 Using the INCR/DECR commands:
 -----------------------------
 
-redis> INCR counterkey
-(integer) 1
+    redis> INCR counterkey
+    (integer) 1
 
-redis> INCR counterkey
-(integer) 2
+    redis> INCR counterkey
+    (integer) 2
 
-redis> GET counterkey
-(integer) 2
-
-redis> DECR counterkey
-(integer) 1
-
-redis> DECRBY counterkey 5
-(integer) -4
-
-redis> INCRBY counterkey 10
-(integer) 6
+    redis> GET counterkey
+    (integer) 2
+    
+    redis> DECR counterkey
+    (integer) 1
+    
+    redis> DECRBY counterkey 5
+    (integer) -4
+    
+    redis> INCRBY counterkey 10
+    (integer) 6
 
 Note that Redis initialised the counterkey value to 0 before applying the INCR command at the first step and the response for each issuing of the command is the value that the key is now set to, not the older value.
 
@@ -68,14 +68,14 @@ Using SETBIT and GETBIT
 
 Intuitively useful for application flags, but note that these commands can act on *any* string, and so can be used to make arbitrary changes as required.
 
-redis> SET foo 8 1
-(integer) 0
+    redis> SET foo 8 1
+    (integer) 0
 
 (NB foo didn't exist until the SETBIT command)
 
-redis> GET foo
-"\x00\x80"
+    redis> GET foo
+    "\x00\x80"
 
-redis> GETBIT foo 8
-(integer) 1
+    redis> GETBIT foo 8
+    (integer) 1
 

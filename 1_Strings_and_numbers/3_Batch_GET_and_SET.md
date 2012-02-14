@@ -14,20 +14,20 @@ Using multiple keys:
 
 The MSET syntax is straightforward, appending the key value pairs after the MSET command:
 
-redis> MSET key1 value1 key2 value2 .... keyN valueN
+    redis> MSET key1 value1 key2 value2 .... keyN valueN
 
 For example:
 
-redis> MSET foo1 "Hello" foo2 "World" foo3 "Dev8D"
-OK
+    redis> MSET foo1 "Hello" foo2 "World" foo3 "Dev8D"
+    OK
 
 MGET is even more straightforward, simply being MGET followed by a list of keys you wish to retrieve. For example:
 
-redis> MGET foo1 foo3 thiskeydoesntexist foo3
-1) "Hello"
-2) "Dev8D"
-3) (nil)
-4) "Dev8D"
+    redis> MGET foo1 foo3 thiskeydoesntexist foo3
+    1) "Hello"
+    2) "Dev8D"
+    3) (nil)
+    4) "Dev8D"
 
 It should be clear that some interesting things happen here. Firstly, the keys are returned in the same order that they are queried in. Note that I included a key that does not exist and this responds in exactly the same manner as it would do if I had asked for it individually. Finally, you can ask for the same key multiple times, and it will appear in the responses multiple times too, so something to be aware of.
 

@@ -29,41 +29,41 @@ An expensive, but useful command is the KEYS command. It allows you to find any 
 
 (connect to a used redis instance:)
 
-redis> KEYS *
-......... lots of keys .....
+    redis> KEYS *
+    ......... lots of keys .....
 
 TYPE is also a very useful tool to help you inspect or perhaps even rediscover the type of value associated with a KEY. This becomes more useful later, when you are working with other sorts of values, such as lists and sets, as well as strings and integers.
 
-redis> SET message "Foo"
-OK
+    redis> SET message "Foo"
+    OK
 
-redis> TYPE message
-string
+    redis> TYPE message
+    string
 
 (List example:)
 
-redis> LPUSH queue "Foo"
-(integer) 1
+    redis> LPUSH queue "Foo"
+    (integer) 1
 
-redis> TYPE queue
-list
+    redis> TYPE queue
+    list
 
 Renaming keys
 -------------
 
 RENAME key is a handy command which has its uses. It simply changes the association of a value from one key value to another. For example:
 
-redis> SET mykey "Hello Dev8D"
-OK
+    redis> SET mykey "Hello Dev8D"
+    OK
 
-redis> RENAME mykey mynewkey
-OK
+    redis> RENAME mykey mynewkey
+    OK
 
-redis> GET mynewkey
-"Hello"
+    redis> GET mynewkey
+    "Hello"
 
-redis> GET mykey
-(nil)
+    redis> GET mykey
+    (nil)
 
 RENAMENX is useful in a multi-client system much like SETNX before, as this will allow you to avoid accidentally overwriting keys through renaming.
 
@@ -76,29 +76,29 @@ There are three key commands used to set expirations: EXPIRE, EXPIREAT and SETEX
 
 (cause the 'message' key to expire in 10 seconds)
 
-redis> EXPIRE message 10
-(integer) 1
-
-redis> GET message
-"Foo"
+    redis> EXPIRE message 10
+    (integer) 1
+    
+    redis> GET message
+    "Foo"
 
 ... wait a bit ...
 
-redis> GET message
-(nil)
+    redis> GET message
+    (nil)
 
 EXPIREAT works in the same manner, but takes a UNIX timestamp for the time you want things to expire:
 
 For example:
 The epoch timestamp of 1329236925 corresponds to the normal time of Tue, 14 Feb 2012 16:28:45 GMT
 
-redis> EXPIRESAT queue 1329236925
-(integer) 1
+    redis> EXPIRESAT queue 1329236925
+    (integer) 1
 
 SETEX is a way to set both the value and the expiration timeout of a key in a single action (NB note the slightly counter-intuitive syntax. This is required as the string value can be binary.)
 
-redis> SETEX message 30 "This message will self-destruct"
-OK
+    redis> SETEX message 30 "This message will self-destruct"
+    OK
 
 The key 'message' will expire in 30 seconds from the point when the command is accepted.
 
@@ -107,20 +107,20 @@ Checking expiration times - TTL
 
 TTL is a handy command to check how long keys have to 'live'. For example:
 
-redis> SETEX message 30 "This message will self-destruct"
-OK
-redis> TTL message
-(integer) 28
+    redis> SETEX message 30 "This message will self-destruct"
+    OK
+    redis> TTL message
+    (integer) 28
 
 ...
 
-redis> TTL message
-(integer) 18
+    redis> TTL message
+    (integer) 18
 
 ...
 
-redis> TTL message
-(integer) -1
+    redis> TTL message
+    (integer) -1
 
 (message key no longer exists, so the TTL command will respond with -1)
 

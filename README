@@ -64,6 +64,12 @@ Part 1 - String and Integers
 
     Simple exercises outlining the basic 'objects' that Redis understands, with some (contrived) examples and exercises aiming to show the usefulness of certain basic commands in multiple client situations, such as INCR and SETNX.
 
-Part 2 - 
+Part 2 - Hashes
 
+    An overview of the redis commands that act on its 'hash' data structure.
 
+Part 3 - Lists
+
+    An overview of the powerful linked list data structure in redis, with exercises covering how you might create a robust message queue from them.
+
+Part 4 - 
