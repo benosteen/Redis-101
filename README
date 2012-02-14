@@ -1,0 +1,69 @@
+Redis 101
+---------
+
+An introduction to the functionality of Redis (redis.io) prepared for a 1 hour workshop at Dev8D 2012 (dev8d.org).
+
+First Concepts:
+---------------
+
+The fundamental relationship that Redis understands is that of the key-value relationship. 
+
+A key can be any string, with a very large theoretical upper limit on length. It is advised to keep the keys short as this reduces memory use and reduces the time that Redis takes doing key lookups internally.
+
+The values that can be associated with a key are far more interesting than just 'string'. A value can be:
+
+- A string
+    Often quoted as a 'binary-safe' string, this can be any binary data, up to 1Gb currently, although there are good reasons why designing to reach this limit is not a great idea. Simply put, a string value could be as simple as "Hello World" or as a cache of a PNG rendered 'on-the-fly' from volatile data.
+
+- A hash (aka 'dict') of strings
+    A useful tool to organise keys in a limited hierarchy.
+
+- A list of strings
+    Implements typical list functionality, such as push, pop, and ranges, on strings as outlined above. (Implemented internally as a Linked List.)
+
+- A set of strings
+    Set functionality, including methods such as membership, union, difference and so on.
+
+- A sorted set of strings
+    Much like above, but with an additional qualifying value per member of the set that is used for ordering. The "Hello World" example for this often uses programmer's names with the sorting value set to their birthyear.
+
+Basic Interactions:
+
+To work with a Redis instance, you send it commands, very often along with the key that you wish that command to act on, along with the parameters or values that the command requires. The various parts below will go through all the major commands that Redis understands, and aims to give context to their use, and why you might want to use them. Each part has its own directory in this repository to provide both a means to order the workshop and also to give a scripting workspace for each part.
+
+(NB by convention, words that are fully capitalised in this set of worksheets are to be understood as Redis commands, such as GET, SETNX, LPUSH and so on. Any line beginning with 'redis>' is to be understood as a 'redis commandline' and that the string to the right of the '>' is sent to Redis, with the response appearing underneath it.)
+
+The syntax used when talking to an instance is straightforward and only has a few forms:
+
+redis> COMMAND
+
+redis> COMMAND key
+
+redis> COMMAND key value
+
+redis> COMMAND key param1 [param2]
+
+redis> COMMAND key [key [key [key ... ]]]
+
+For now, just be aware of the basic structure of the commands as the specifics of each will be covered in the next parts of the workshop.
+
+Itinery:
+--------
+
+Part 0 - Bootstrapping:
+    
+    Installing and starting a Redis instance. (No documentation will be given here, as the official documentation is and will continue to be the best place to get this sort of information and guidance.)
+    
+    Linux/OS X download and install steps are outlined here: http://redis.io/download
+    
+    Windows: There is no official port for this platform, although there is this port: https://github.com/dmajkic/redis (YMMV)
+    
+    This part will focus on the configuration file for redis and what details to be aware of.
+
+Part 1 - String and Integers
+
+    Simple exercises outlining the basic 'objects' that Redis understands, with some (contrived) examples and exercises aiming to show the usefulness of certain basic commands in multiple client situations, such as INCR and SETNX.
+
+Part 2 - 
+
+
